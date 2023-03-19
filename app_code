@@ -1,0 +1,65 @@
+import kivy
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.core.window import Window
+
+kivy.require('1.11.1')  # replace with your current kivy version
+
+
+class NotesApp(App):
+    def build(self):
+        self.window = Window
+        self.window.clearcolor = (5, 5, 1, 1)
+        self.notes = []
+        layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
+        heading_label = Label(text='Notes App', font_size=30, size_hint_y=None, height=50)
+        layout.add_widget(heading_label)
+        title_layout = self.build_title_layout()
+        layout.add_widget(title_layout)
+        self.notes_container = BoxLayout(orientation='vertical', size_hint_y=None, spacing=10)
+        self.notes_container.bind(minimum_height=self.notes_container.setter('height'))
+        layout.add_widget(self.notes_container)
+        add_note_btn = Button(text='Add Medicine', size_hint_y=None, height=50)
+        add_note_btn.bind(on_press=self.add_note)
+        layout.add_widget(add_note_btn)
+        return layout
+
+    def build_title_layout(self):
+        title_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=50, spacing=10)
+        title_input1 = Label(text='Name', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_input2 = Label(text='Quantity(ml)', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_input3 = Label(text='Expiry date', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_input4 = Label(text='', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_layout.add_widget(title_input1)
+        title_layout.add_widget(title_input2)
+        title_layout.add_widget(title_input3)
+        title_layout.add_widget(title_input4)
+
+        return title_layout
+
+    def add_note(self, instance):
+        note_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=50, spacing=10)
+        note_input1 = TextInput(text='', size_hint_x=0.33, multiline=False)
+        note_input2 = TextInput(text='', size_hint_x=0.33, multiline=False)
+        note_input3 = TextInput(text='', size_hint_x=0.33, multiline=False)
+        note_delete_btn = Button(text='Delete', size_hint_x=0.33)
+        note_delete_btn.bind(on_press=self.delete_note)
+        note_layout.add_widget(note_input1)
+        note_layout.add_widget(note_input2)
+        note_layout.add_widget(note_input3)
+        note_layout.add_widget(note_delete_btn)
+        self.notes_container.add_widget(note_layout)
+        self.notes.append((note_input1, note_input2, note_input3))
+
+    def delete_note(self, instance):
+        for note in self.notes:
+            if note[0].parent == instance.parent:
+                self.notes_container.remove_widget(instance.parent)
+                self.notes.remove(note)
+                break
+
+
+NotesApp().run()
