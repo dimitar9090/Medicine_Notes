@@ -32,11 +32,13 @@ class NotesApp(App):
         title_input1 = Label(text='Name', size_hint_x=0.33, color=(0, 0, 0, 1))
         title_input2 = Label(text='Quantity(ml)', size_hint_x=0.33, color=(0, 0, 0, 1))
         title_input3 = Label(text='Expiry date', size_hint_x=0.33, color=(0, 0, 0, 1))
-        title_input4 = Label(text='', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_input4 = Label(text='Notes', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_input5 = Label(text='', size_hint_x=0.33, color=(0, 0, 0, 1))
         title_layout.add_widget(title_input1)
         title_layout.add_widget(title_input2)
         title_layout.add_widget(title_input3)
         title_layout.add_widget(title_input4)
+        title_layout.add_widget(title_input5)
 
         return title_layout
 
@@ -45,11 +47,13 @@ class NotesApp(App):
         note_input1 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_input2 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_input3 = TextInput(text='', size_hint_x=0.33, multiline=False)
+        note_input4 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_delete_btn = Button(text='Delete', size_hint_x=0.33)
         note_delete_btn.bind(on_press=self.delete_note)
         note_layout.add_widget(note_input1)
         note_layout.add_widget(note_input2)
         note_layout.add_widget(note_input3)
+        note_layout.add_widget(note_input4)
         note_layout.add_widget(note_delete_btn)
         self.notes_container.add_widget(note_layout)
         self.notes.append((note_input1, note_input2, note_input3))
