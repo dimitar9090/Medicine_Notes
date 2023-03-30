@@ -12,10 +12,10 @@ kivy.require('1.11.1')  # replace with your current kivy version
 class NotesApp(App):
     def build(self):
         self.window = Window
-        self.window.clearcolor = (5, 5, 1, 1)
+        self.window.clearcolor = (1, 0.5, 0, 1)
         self.notes = []
         layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
-        heading_label = Label(text='Notes App', font_size=30, size_hint_y=None, height=50)
+        heading_label = Label(text='Medicine App', font_size=30, size_hint_y=None, height=50, color=(0, 0, 1, 1))
         layout.add_widget(heading_label)
         title_layout = self.build_title_layout()
         layout.add_widget(title_layout)
@@ -49,6 +49,7 @@ class NotesApp(App):
         note_input3 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_input4 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_delete_btn = Button(text='Delete', size_hint_x=0.33)
+
         note_delete_btn.bind(on_press=self.delete_note)
         note_layout.add_widget(note_input1)
         note_layout.add_widget(note_input2)
