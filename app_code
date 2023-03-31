@@ -15,24 +15,30 @@ class NotesApp(App):
         self.window.clearcolor = (1, 0.5, 0, 1)
         self.notes = []
         layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
-        heading_label = Label(text='Medicine App', font_size=30, size_hint_y=None, height=50, color=(0, 0, 1, 1))
+        heading_label = Label(markup=True, text='Medicine App',
+                              font_size=80, size_hint_y=None, height=70, color=(0, 0, 1, 1), font_name='Segoepr.ttf')
         layout.add_widget(heading_label)
         title_layout = self.build_title_layout()
         layout.add_widget(title_layout)
         self.notes_container = BoxLayout(orientation='vertical', size_hint_y=None, spacing=10)
         self.notes_container.bind(minimum_height=self.notes_container.setter('height'))
         layout.add_widget(self.notes_container)
-        add_note_btn = Button(text='Add Medicine', size_hint_y=None, height=50)
+        add_note_btn = Button(text='Add Medicine', size_hint_y=None, height=50, font_size=20,
+                              font_name='Segoepr.ttf', markup=True)
         add_note_btn.bind(on_press=self.add_note)
         layout.add_widget(add_note_btn)
         return layout
 
     def build_title_layout(self):
         title_layout = BoxLayout(orientation='horizontal', size_hint_y=None, height=50, spacing=10)
-        title_input1 = Label(text='Name', size_hint_x=0.33, color=(0, 0, 0, 1))
-        title_input2 = Label(text='Quantity(ml)', size_hint_x=0.33, color=(0, 0, 0, 1))
-        title_input3 = Label(text='Expiry date', size_hint_x=0.33, color=(0, 0, 0, 1))
-        title_input4 = Label(text='Notes', size_hint_x=0.33, color=(0, 0, 0, 1))
+        title_input1 = Label(markup=True, text='Name', size_hint_x=0.33, color=(0, 0, 0, 1),
+                             font_name='Segoepr.ttf', font_size=20)
+        title_input2 = Label(markup=True, text='Quantity(ml)', size_hint_x=0.33, color=(0, 0, 0, 1),
+                             font_name='Segoepr.ttf', font_size=20)
+        title_input3 = Label(markup=True, text='Expiry date', size_hint_x=0.33, color=(0, 0, 0, 1),
+                             font_name='Segoepr.ttf', font_size=20)
+        title_input4 = Label(markup=True, text='Notes', size_hint_x=0.33, color=(0, 0, 0, 1),
+                             font_name='Segoepr.ttf', font_size=20)
         title_input5 = Label(text='', size_hint_x=0.33, color=(0, 0, 0, 1))
         title_layout.add_widget(title_input1)
         title_layout.add_widget(title_input2)
@@ -48,7 +54,7 @@ class NotesApp(App):
         note_input2 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_input3 = TextInput(text='', size_hint_x=0.33, multiline=False)
         note_input4 = TextInput(text='', size_hint_x=0.33, multiline=False)
-        note_delete_btn = Button(text='Delete', size_hint_x=0.33)
+        note_delete_btn = Button(text='Delete', size_hint_x=0.33, font_size=20, font_name='Segoepr.ttf', markup=True)
 
         note_delete_btn.bind(on_press=self.delete_note)
         note_layout.add_widget(note_input1)
